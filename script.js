@@ -72,7 +72,7 @@ class SkillAnimator {
 // Scroll Reveal Animation
 class ScrollReveal {
     constructor() {
-        this.elements = document.querySelectorAll('.overview-card, .feature, .intro-card, .cta-content');
+        this.elements = document.querySelectorAll('.overview-card, .feature, .intro-card, .cta-content, .project-card, .about-card, .value-card');
         this.init();
     }
 
@@ -125,7 +125,7 @@ class ButtonEffects {
     }
 
     addRippleEffect() {
-        const buttons = document.querySelectorAll('.hero-btn, .cta-button, .card-link');
+        const buttons = document.querySelectorAll('.hero-btn, .cta-button, .card-link, .btn-primary, .btn-secondary');
 
         buttons.forEach(button => {
             button.addEventListener('click', function (e) {
@@ -174,6 +174,190 @@ class ButtonEffects {
     }
 }
 
+// Navigation Active State Handler
+class NavigationHandler {
+    constructor() {
+        this.navLinks = document.querySelectorAll('nav a');
+        this.init();
+    }
+
+    init() {
+        this.updateActiveNav();
+        window.addEventListener('load', () => this.updateActiveNav());
+    }
+
+    updateActiveNav() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        this.navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === currentPage ||
+                (currentPage === '' && link.getAttribute('href') === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+    }
+}
+
+// Form Validation and Submission
+class FormHandler {
+    constructor() {
+        this.form = document.querySelector('.contact-form form');
+        if (this.form) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+        this.setupValidation();
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        if (this.validateForm()) {
+            // Show success message
+            const submitBtn = this.form.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent Successfully!';
+
+            // Reset form
+            this.form.reset();
+
+            // Restore button after 3 seconds
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }, 3000);
+        }
+    }
+
+    validateForm() {
+        const nameInput = this.form.querySelector('#name');
+        const emailInput = this.form.querySelector('#email');
+        const subjectInput = this.form.querySelector('#subject');
+        const messageInput = this.form.querySelector('#message');
+
+        let isValid = true;
+
+        // Validate name
+        if (!nameInput.value.trim()) {
+            this.showFieldError(nameInput, 'Name is required');
+            isValid = false;
+        }
+
+        // Validate email
+        if (!this.isValidEmail(emailInput.value)) {
+            this.showFieldError(emailInput, 'Please enter a valid email');
+            isValid = false;
+        }
+
+        // Validate subject
+        if (!subjectInput.value.trim()) {
+            this.showFieldError(subjectInput, 'Subject is required');
+            isValid = false;
+        }
+
+        // Validate message
+        if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
+            this.showFieldError(messageInput, 'Message must be at least 10 characters');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    showFieldError(field, message) {
+        // Add error styling
+        field.style.borderColor = '#dc3545';
+        field.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
+
+        // Create error message
+        const errorMsg = document.createElement('small');
+        errorMsg.style.color = '#dc3545';
+        errorMsg.style.display = 'block';
+        errorMsg.style.marginTop = '5px';
+        errorMsg.textContent = message;
+
+        // Remove previous error if exists
+        const prevError = field.nextElementSibling;
+        if (prevError && prevError.tagName === 'SMALL') {
+            prevError.remove();
+        }
+
+        field.parentNode.insertBefore(errorMsg, field.nextSibling);
+
+        // Remove error on focus
+        field.addEventListener('focus', () => {
+            field.style.borderColor = '#e9ecef';
+            field.style.boxShadow = '';
+            if (errorMsg) errorMsg.remove();
+        }, { once: true });
+    }
+
+    setupValidation() {
+        const inputs = this.form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', (e) => {
+                if (e.target.value.trim()) {
+                    e.target.style.borderColor = '';
+                }
+            });
+        });
+    }
+}
+
+// Scroll Progress Bar
+class ScrollProgressBar {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', () => this.updateProgress());
+    }
+
+    updateProgress() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+
+        // You can use this value to update a progress bar if needed
+        // Example: document.querySelector('.progress-bar').style.width = scrolled + '%';
+    }
+}
+
+// Performance: Lazy Load Images
+class LazyImageLoader {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        if ('IntersectionObserver' in window) {
+            const images = document.querySelectorAll('img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.animation = 'fadeIn 0.5s ease-in';
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+    }
+}
+
 // Initialize all animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize skill progress bars
@@ -185,15 +369,17 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize button effects
     new ButtonEffects();
 
-    // Form submission handler for contact form
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
-        });
-    }
+    // Initialize navigation handler
+    new NavigationHandler();
+
+    // Initialize form handler
+    new FormHandler();
+
+    // Initialize scroll progress
+    new ScrollProgressBar();
+
+    // Initialize lazy loading
+    new LazyImageLoader();
 
     // Add smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -208,9 +394,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Add keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.activeElement.blur();
+        }
+    });
 });
 
-// Add ripple animation to CSS
+// Add animations to CSS
 const style = document.createElement('style');
 style.textContent = `
     @keyframes ripple {
@@ -218,6 +411,21 @@ style.textContent = `
             transform: translate(0, 0) scale(4);
             opacity: 0;
         }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Loading state for forms */
+    .submit-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
     }
 `;
 document.head.appendChild(style);
