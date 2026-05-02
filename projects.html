@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Kunthea | Web Developer Portfolio</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container nav">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="picture/pic1.png" alt="Kunthea Logo" class="logo-icon">
+                    <span class="logo-text">KUNTHEA YON</span>
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <a href="skills.html">SKILLS</a>
+                <a href="projects.html" class="active">PROJECTS</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero hero-projects">
+        <div class="container">
+            <h1><i class="fas fa-code"></i> My Projects</h1>
+            <p>Showcasing innovative web development solutions</p>
+        </div>
+    </section>
+
+    <section class="section projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Work</h2>
+                <p class="section-subtitle">A collection of full-stack applications demonstrating modern web development
+                    expertise</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-category">UX/UI Designer</div>
+                    </div>
+                    <h3>Hostospital system</h3>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-clock"></i> 1 months</span>
+                        <span class="meta-item"><i class="fas fa-users"></i> Team of 3</span>
+                        <span class="meta-item"><i class="fas fa-user-check"></i> Designer</span>
+                    </div>
+                    <p>
+                        A my project is a hospital management system that provides a comprehensive solution for managing various aspects of a hospital's operations. 
+                        The system includes features such as patient registration, appointment scheduling, medical.
+                    </p>
+                    <ul class="project-highlights">
+                        <li><i class="fas fa-check-circle"></i> Real-time data updates with WebSockets</li>
+                        <li><i class="fas fa-check-circle"></i> Customizable dashboards and filter panels</li>
+                        <li><i class="fas fa-check-circle"></i> Role-based access controls with secure auth</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech"><i class="fab fa-react"></i> Figma</span>
+                        <span class="tech"><i class="fab fa-node-js"></i> Node.js</span>
+                        <span class="tech">Chart.js</span>
+                        <span class="tech"><i class="fas fa-database"></i> MySQL</span>
+                    </div>
+                    <div class="project-links">
+                        <button class="btn-primary" onclick="projectAlert('Dashboard Management System')">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fab fa-github"></i> Source Code
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <div class="project-category">Inventory Management</div>
+                    </div>
+                    <h3>Ring Inventory System</h3>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-clock"></i> 1.5 months</span>
+                        <span class="meta-item"><i class="fas fa-users"></i> Team of 5</span>
+                        <span class="meta-item"><i class="fas fa-user-cog"></i> Developer</span>
+                    </div>
+                    <p>
+                        Full-stack inventory management application for jewelry business. Implements complete CRUD
+                        operations with image upload functionality, search and filtering capabilities, and
+                        comprehensive reporting features for stock management.
+                    </p>
+                    <ul class="project-highlights">
+                        <li><i class="fas fa-check-circle"></i> Image uploads with validation and previews</li>
+                        <li><i class="fas fa-check-circle"></i> Advanced search filters and export to CSV</li>
+                        <li><i class="fas fa-check-circle"></i> Dashboard summaries with charts</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech"><i class="fab fa-node-js"></i> React.js</span>
+                        <span class="tech"><i class="fas fa-database"></i> MySQL</span>
+                        <span class="tech"><i class="fas fa-file-upload"></i> Node.js</span>
+                        <span class="tech"><i class="fas fa-file-upload"></i> Redis</span>
+                       
+                    </div>
+                    <div class="project-links">
+                        <button class="btn-primary" onclick="projectAlert('Ring Inventory System')">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fab fa-github"></i> Source Code
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="project-category">User Management</div>
+                    </div>
+                    <h3>User Pair Management System</h3>
+                    <p>
+                        Advanced user relationship and permissions management platform. Features role-based access
+                        control, user pairing algorithms, and comprehensive audit logging. Built with security
+                        best practices and scalable architecture.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech"><i class="fab fa-node-js"></i> Node.js</span>
+                        <span class="tech"><i class="fas fa-leaf"></i> MongoDB</span>
+                        <span class="tech">JWT</span>
+                        <span class="tech"><i class="fab fa-react"></i> React</span>
+                    </div>
+                    <div class="project-links">
+                        <button class="btn-primary" onclick="projectAlert('User Pair Management System')">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fab fa-github"></i> Source Code
+                        </button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="project-category">Algorithms</div>
+                    </div>
+                    <h3>E-Commerce Platform</h3>
+                    <p>
+                        Modern e-commerce solution with shopping cart, payment integration, and admin dashboard.
+                        Includes product catalog, user accounts, order management, and responsive design optimized
+                        for conversion and user experience.
+                    </p>
+                    <div class="tech-stack">
+                        <span class="tech"><i class="fab fa-react"></i> Python</span>
+                        <span class="tech"><i class="fab fa-stripe"></i> API</span>
+                        <span class="tech"><i class="fas fa-file-upload"></i> HTML</span>
+                        <span class="tech"><i class="fas fa-file-upload"></i> CSS</span>
+                        <span class="tech"><i class="fab fa-node-js"></i> Javascript</span>
+                        <span class="tech"><i class="fas fa-database"></i> PostgreSQL</span>
+                    </div>
+                    <div class="project-links">
+                        <button class="btn-primary" onclick="projectAlert('E-Commerce Platform')">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fab fa-github"></i> Source Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+  
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Kunthea. All rights reserved.</p>
+            <!-- <nav>
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <a href="skills.html">SKILLS</a>
+                <a href="projects.html" class="active">PROJECTS</a>
+                <a href="contact.html">CONTACT</a>
+            </nav> -->
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
